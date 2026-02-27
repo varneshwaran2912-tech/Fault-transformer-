@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Transformer Monitoring System</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(to right, #0f2027, #203a43, #2c5364);
+            color: white;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+        }
+
+        h1 {
+            background-color: #111;
+            padding: 15px;
+            margin: 0;
+        }
+
+        .container {
+            margin-top: 30px;
+        }
+
+        .card {
+            background-color: rgba(255,255,255,0.1);
+            margin: 20px auto;
+            padding: 20px;
+            width: 90%;
+            max-width: 350px;
+            border-radius: 15px;
+            box-shadow: 0 0 10px black;
+        }
+
+        .normal {
+            color: #00ff88;
+            font-weight: bold;
+        }
+
+        .fault {
+            color: #ff4444;
+            font-weight: bold;
+        }
+
+        .btn {
+            padding: 10px 20px;
+            margin-top: 20px;
+            border: none;
+            border-radius: 8px;
+            background-color: #ff9800;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        .btn:hover {
+            background-color: #e68900;
+        }
+    </style>
+</head>
+
+<body>
+
+<h1>⚡ Transformer Line Monitoring</h1>
+
+<div class="container">
+
+    <div class="card">
+        <h2>Transformer 1</h2>
+        <p>Voltage: <span id="v1">0</span> V</p>
+        <p>Status: <span id="s1" class="normal">Normal</span></p>
+    </div>
+
+    <div class="card">
+        <h2>Transformer 2</h2>
+        <p>Voltage: <span id="v2">0</span> V</p>
+        <p>Status: <span id="s2" class="normal">Normal</span></p>
+    </div>
+
+    <div class="card">
+        <h2>Transformer 3</h2>
+        <p>Voltage: <span id="v3">0</span> V</p>
+        <p>Status: <span id="s3" class="normal">Normal</span></p>
+    </div>
+
+    <button class="btn" onclick="simulate()">Simulate Fault</button>
+
+</div>
+
+<script>
+    function simulate() {
+
+        let v1 = Math.floor(Math.random() * 250);
+        let v2 = Math.floor(Math.random() * 250);
+        let v3 = Math.floor(Math.random() * 250);
+
+        document.getElementById("v1").innerHTML = v1;
+        document.getElementById("v2").innerHTML = v2;
+        document.getElementById("v3").innerHTML = v3;
+
+        checkStatus(v1, "s1");
+        checkStatus(v2, "s2");
+        checkStatus(v3, "s3");
+    }
+
+    function checkStatus(voltage, id) {
+
+        if (voltage < 180) {
+            document.getElementById(id).innerHTML = "FAULT ⚠";
+            document.getElementById(id).className = "fault";
+        } else {
+            document.getElementById(id).innerHTML = "Normal";
+            document.getElementById(id).className = "normal";
+        }
+    }
+</script>
+
+</body>
+</html>
